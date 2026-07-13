@@ -62,6 +62,8 @@
       if (r.top <= line && r.bottom > line) { idx = i; break; }
     }
     panels[idx].classList.add('in-view');
+    // тема активной панели — чтобы рейка меняла цвет на светлых экранах
+    document.body.classList.toggle('nav-on-light', panels[idx].classList.contains('t-light'));
     if (idx === current) return;
     current = idx;
     railItems.forEach((it, k) => it.setAttribute('aria-current', k === idx ? 'true' : 'false'));
