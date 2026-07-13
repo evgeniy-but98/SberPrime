@@ -27,6 +27,10 @@
   /* прохладный акцент */
   --violet: #8E6BD6;
   /* фиолетовый акцент */
+  --orange: #FF8A2B;
+  /* оранжевый / янтарный (КотоДрайв) */
+  --pink: #F0559E;
+  /* розовый (Леди Мелодия) */
 
   --font-display: 'Unbounded', system-ui, sans-serif;
   --font-body: 'Manrope', system-ui, sans-serif;
@@ -158,9 +162,7 @@ li {
   align-items: center;
 }
 
-.wrap--split-rev .videoframe {
-  order: -1;
-}
+/* в двухколоночных блоках порядок «медиа/текст» задаётся порядком в разметке */
 
 /* =========================================================================
    Типографика / общие блоки
@@ -203,9 +205,9 @@ li {
 .h-display {
   font-family: var(--font-display);
   font-weight: 800;
-  line-height: .98;
+  line-height: 1;
   letter-spacing: -.01em;
-  font-size: clamp(2.3rem, 4vw, 4.6rem);
+  font-size: clamp(2.3rem, 5.4vw, 4.4rem);
   margin: 0;
   color: var(--ink);
 }
@@ -224,10 +226,10 @@ li {
 }
 
 .body-lg {
-  font-size: clamp(1rem, 1.6vw, 1.22rem);
-  line-height: 1.55;
+  font-size: clamp(1rem, 1.5vw, 1.18rem);
+  line-height: 1.5;
   max-width: 46ch;
-  margin: 1.4rem 0 0;
+  margin: 1.05rem 0 0;
   color: inherit;
 }
 
@@ -240,7 +242,7 @@ li {
 }
 
 .lede {
-  margin-bottom: clamp(1.8rem, 3.5vh, 2.8rem);
+  margin-bottom: clamp(1.1rem, 2.2vh, 1.9rem);
   max-width: 100ch;
 }
 
@@ -318,11 +320,14 @@ li {
 }
 
 .blob--sun {
-  width: 46vmax;
-  height: 46vmax;
-  top: -14vmax;
-  right: -8vmax;
+  width: 42vmax;
+  height: 42vmax;
+  top: -16vmax;
+  right: -10vmax;
+  /* приглушённый жёлтый — заставка не выглядит кислотной */
   background: var(--sun);
+  opacity: .34;
+  filter: blur(70px) saturate(.8);
 }
 
 .blob--green {
@@ -651,8 +656,8 @@ li {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: .6rem;
-  margin: 1.6rem 0 0;
+  gap: .5rem;
+  margin: 1.1rem 0 0;
   padding: 0;
 }
 
@@ -675,10 +680,10 @@ li {
 
 .beats {
   list-style: none;
-  margin: 1.6rem 0 0;
+  margin: 1.1rem 0 0;
   padding: 0;
   display: grid;
-  gap: .85rem;
+  gap: .6rem;
 }
 
 .beats li {
@@ -840,7 +845,7 @@ li {
 
 .videoframe__plate {
   display: inline-block;
-  margin-top: 1rem;
+  margin-top: .65rem;
   margin-left: .4rem;
   font-family: var(--font-display);
   font-weight: 700;
@@ -1106,6 +1111,363 @@ li {
 }
 
 /* =========================================================================
+   COVER CTA (кнопка «Начать» / «К началу»)
+   ========================================================================= */
+.cover-cta {
+  margin-top: clamp(1.6rem, 3.5vh, 2.6rem);
+}
+
+.cta {
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-size: clamp(.82rem, 1.4vw, .95rem);
+  color: var(--ink);
+  background: var(--sun);
+  border: var(--border) solid var(--ink);
+  border-radius: 999px;
+  padding: .95em 2.2em;
+  box-shadow: 5px 5px 0 var(--tomato);
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease);
+}
+
+.cta:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 var(--tomato);
+}
+
+.cta:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--tomato);
+}
+
+.cta--ghost {
+  color: var(--paper);
+  background: transparent;
+  border-color: var(--paper);
+  box-shadow: 5px 5px 0 var(--sun);
+}
+
+.cta:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 3px;
+}
+
+/* мягче жёлтый на заставке/финале */
+.panel--cover .cover-bg .burst,
+.panel--end .cover-bg .burst {
+  opacity: .1;
+}
+
+/* =========================================================================
+   Текстовые акценты (предисловие, персонажи, локация, переходы)
+   ========================================================================= */
+.lede-note {
+  margin: 1.5rem 0 0;
+  font-family: var(--font-mono);
+  font-size: clamp(.82rem, 1.3vw, .95rem);
+  line-height: 1.5;
+  color: var(--green-700);
+  padding-left: .9rem;
+  border-left: 3px solid var(--tomato);
+}
+
+.callout {
+  margin: 1.3rem 0 0;
+  font-weight: 600;
+  font-size: clamp(.95rem, 1.4vw, 1.08rem);
+  line-height: 1.5;
+  color: var(--paper);
+  background: rgba(255, 197, 49, .1);
+  border: 1.5px solid rgba(255, 197, 49, .55);
+  border-radius: 14px;
+  padding: .9rem 1.1rem;
+}
+
+.fineprint {
+  margin: 1.4rem 0 0;
+  font-size: clamp(.85rem, 1.3vw, .98rem);
+  line-height: 1.5;
+  opacity: .78;
+}
+
+.t-dark .fineprint {
+  color: rgba(255, 246, 230, .7);
+}
+
+.fineprint--center {
+  text-align: center;
+  max-width: 70ch;
+  margin-inline: auto;
+}
+
+/* =========================================================================
+   SPLIT-MEDIA — стопка кадров в двухколоночном блоке
+   ========================================================================= */
+.split-media {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(.7rem, 1.4vw, 1.1rem);
+}
+
+.split-media .videoframe--sm {
+  align-self: flex-end;
+  width: 68%;
+}
+
+.split-media .videoframe--sm .videoframe__media {
+  max-width: 100%;
+  aspect-ratio: 16/9;
+}
+
+/* плашка «Режиссёрский подход» в углу кадра (предисловие) */
+.videoframe__plate--corner {
+  position: absolute;
+  right: .6rem;
+  bottom: .6rem;
+  margin: 0;
+  z-index: 3;
+  font-size: .78rem;
+}
+
+/* =========================================================================
+   VCARD — карточка «видео + заголовок + описание» (варианты, переходы)
+   ========================================================================= */
+.vcard {
+  margin: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.vcard .videoframe__media {
+  transform: rotate(-1deg);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.vcard:hover .videoframe__media {
+  transform: rotate(0deg) scale(1.01);
+  box-shadow: 9px 9px 0 var(--ink);
+}
+
+.vcard__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+  line-height: 1.15;
+  margin: 1.1rem 0 0;
+  color: inherit;
+}
+
+.vcard__desc {
+  margin: .5rem 0 0;
+  font-size: clamp(.9rem, 1.3vw, 1rem);
+  line-height: 1.45;
+  color: inherit;
+  opacity: .9;
+}
+
+.vcard__desc--under {
+  margin-top: .8rem;
+  max-width: 42ch;
+}
+
+.vcard__mono {
+  display: inline-block;
+  margin-top: .7rem;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--green-700);
+  opacity: .85;
+}
+
+/* значок-плашка на кадре (Основной вариант / Альтернатива …) */
+.badge {
+  position: absolute;
+  left: .7rem;
+  top: .7rem;
+  z-index: 3;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: .64rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: rgba(6, 56, 31, .78);
+  border: 1.5px solid rgba(255, 255, 255, .5);
+  padding: .4em .7em;
+  border-radius: 999px;
+  backdrop-filter: blur(3px);
+}
+
+.badge--main {
+  color: var(--ink);
+  background: var(--sun);
+  border-color: var(--ink);
+}
+
+/* =========================================================================
+   VIDEO — воспроизведение/пауза поверх кадра
+   ========================================================================= */
+.videoframe__media:has(video) {
+  cursor: pointer;
+}
+
+/* при проигрывании кнопка «play» уходит, не мешая смотреть */
+.videoframe.is-playing .playbtn,
+.vcard.is-playing .playbtn {
+  opacity: 0;
+  transform: scale(.8);
+}
+
+.videoframe:hover .playbtn,
+.vcard:hover .playbtn {
+  opacity: 1;
+  transform: none;
+}
+
+.playbtn {
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), opacity .25s;
+}
+
+.playbtn .playbtn__pause {
+  display: none;
+}
+
+.is-playing .playbtn .playbtn__play {
+  display: none;
+}
+
+.is-playing .playbtn .playbtn__pause {
+  display: block;
+}
+
+/* плейсхолдер-кадр (пэкшот/логошот — пока без видео) */
+.videoframe__media--ph {
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, .05) 0 12px, transparent 12px 24px),
+    linear-gradient(135deg, var(--green) 0%, var(--green-800) 55%, var(--ink) 100%);
+}
+
+/* =========================================================================
+   ПЕРСОНАЖИ — 5 цветовых карточек с растровым фоном
+   ========================================================================= */
+.heroes--5 {
+  grid-template-columns: repeat(5, 1fr);
+  max-width: 100%;
+}
+
+.callout {
+  color: var(--paper);
+}
+
+.hero-card__art {
+  aspect-ratio: 16/10;
+  isolation: isolate;
+}
+
+/* видео-бэк (БЭКИ) внутри карточки, затонированное цветом героя */
+.hero-card__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: .9;
+  mix-blend-mode: luminosity;
+}
+
+.hero-card__art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(90% 120% at 50% 0%, color-mix(in srgb, var(--accent) 65%, transparent), transparent 72%),
+    linear-gradient(180deg, transparent 40%, color-mix(in srgb, var(--accent) 40%, var(--green-900)) 100%);
+  mix-blend-mode: multiply;
+}
+
+.hero-card__art .plate {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-card__body {
+  padding: .8rem .9rem 1rem;
+}
+
+.hero-card__trait {
+  margin: 0;
+  font-weight: 600;
+  font-size: .92rem;
+  line-height: 1.35;
+  color: var(--paper);
+}
+
+.hero-card__swatch {
+  display: inline-block;
+  margin-top: .55rem;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--accent) 70%, white);
+}
+
+/* =========================================================================
+   Кнопка-референс музыки (раздел 09)
+   ========================================================================= */
+.ref-toggle {
+  margin-top: 1.3rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .6em;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: .74rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--sun);
+  border: 2.5px solid var(--ink);
+  border-radius: 999px;
+  padding: .6em 1.1em;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease);
+}
+
+.ref-toggle:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+.ref-toggle svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--ink);
+}
+
+.ref-toggle__pause {
+  display: none;
+}
+
+.ref-toggle[aria-pressed="true"] .ref-toggle__play {
+  display: none;
+}
+
+.ref-toggle[aria-pressed="true"] .ref-toggle__pause {
+  display: block;
+}
+
+/* =========================================================================
    Адаптив
    ========================================================================= */
 @media (max-width:900px) {
@@ -1119,23 +1481,26 @@ li {
 
   .wrap--split {
     grid-template-columns: 1fr;
-    gap: 1.8rem;
+    gap: clamp(1.4rem, 3vw, 2.2rem);
   }
 
-  .wrap--split-rev .videoframe {
-    order: 0;
+  /* на узких экранах заголовок/текст всегда ведёт, медиа — следом */
+  .split-text {
+    order: -1;
+  }
+
+  .split-media {
+    max-width: 620px;
+    margin-inline: auto;
+    width: 100%;
   }
 
   .heroes {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .media-row {
-    grid-template-columns: 1fr;
-  }
-
-  .media-row--2 {
-    grid-template-columns: 1fr;
+  .heroes--5 {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .two-col {
@@ -1148,6 +1513,23 @@ li {
 
   .ghostnum {
     font-size: 34vw;
+  }
+}
+
+/* карточные ряды: 3→2 на планшете, 1 на телефоне */
+@media (max-width:820px) {
+  .media-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width:680px) {
+
+  .media-row,
+  .media-row--2 {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-inline: auto;
   }
 }
 
@@ -1174,6 +1556,10 @@ li {
     gap: .8rem;
   }
 
+  .heroes--5 {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .hero-card__desc {
     font-size: .8rem;
     padding: .7rem .8rem 1rem;
@@ -1183,11 +1569,21 @@ li {
     font-size: .76rem;
   }
 
-  .videoframe__media {
+  /* на телефоне убираем комикс-наклон всех кадров */
+  .videoframe__media,
+  .videoframe--sm .videoframe__media,
+  .vcard .videoframe__media {
     transform: none;
   }
 
+  .split-media .videoframe--sm {
+    width: 100%;
+    align-self: stretch;
+  }
+
+  /* заставочный заголовок мельче, чтобы не обрезался на узких экранах */
   .cover-title {
+    font-size: clamp(2.2rem, 11.5vw, 4.2rem);
     text-shadow: none;
   }
 
@@ -1206,21 +1602,23 @@ li {
 
 /* совсем узкие телефоны — герои в одну колонку, чтобы имена и текст дышали */
 @media (max-width:380px) {
-  .heroes {
+
+  .heroes,
+  .heroes--5 {
     grid-template-columns: 1fr;
   }
 
   .hero-card__art {
-    aspect-ratio: 3/1;
+    aspect-ratio: 16/9;
   }
 }
 
 /* невысокие экраны — ужимаем вертикальные отступы и прячем большой номер главы,
    но панель остаётся не ниже экрана: так абсолютные элементы (подсказка «листайте»)
    не наезжают на контент, а высокие панели просто прокручиваются в деке */
-@media (max-height:760px) {
+@media (max-height:870px) {
   .panel {
-    padding-block: clamp(2.5rem, 3.5vh, 3.5rem);
+    padding-block: clamp(2.4rem, 3.4vh, 3.6rem);
   }
 
   .ghostnum {

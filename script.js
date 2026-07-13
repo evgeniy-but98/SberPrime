@@ -44,20 +44,36 @@
     lock._t = setTimeout(() => { locked = false; }, reduce ? 120 : 780);
   }
 
-  /* ---- отслеживание активной главы ----------------------------------- */
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (!e.isIntersecting) return;
-      const idx = panels.indexOf(e.target);
-      if (idx < 0) return;
-      current = idx;
-      e.target.classList.add('in-view');
-      railItems.forEach((it, k) => it.setAttribute('aria-current', k === idx ? 'true' : 'false'));
-      progress.style.width = ((idx) / (panels.length - 1) * 100) + '%';
-      document.body.classList.toggle('is-cover', idx === 0);
-    });
-  }, { threshold: 0.55 });
-  panels.forEach((p) => io.observe(p));
+  /* ---- reveal-контента: срабатывает даже для панелей выше экрана -------
+     (низкий порог — иначе высокая панель никогда не наберёт 55% видимости
+     и её содержимое так и осталось бы невидимым) */
+  const revealIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+  }, { threshold: 0.12 });
+  panels.forEach((p) => revealIO.observe(p));
+
+  /* ---- активная глава = та, что пересекает линию ~42% высоты вьюпорта --
+     надёжно для панелей любой высоты (в отличие от порога видимости) */
+  function updateCurrent() {
+    const line = window.innerHeight * 0.42;
+    let idx = current;
+    for (let i = 0; i < panels.length; i++) {
+      const r = panels[i].getBoundingClientRect();
+      if (r.top <= line && r.bottom > line) { idx = i; break; }
+    }
+    panels[idx].classList.add('in-view');
+    if (idx === current) return;
+    current = idx;
+    railItems.forEach((it, k) => it.setAttribute('aria-current', k === idx ? 'true' : 'false'));
+    progress.style.width = (idx / (panels.length - 1) * 100) + '%';
+    document.body.classList.toggle('is-cover', idx === 0);
+  }
+  let ticking = false;
+  deck.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { updateCurrent(); ticking = false; });
+  }, { passive: true });
 
   /* ---- колесо мыши: один щелчок = одна глава (только тонкий указатель) - */
   const fine = matchMedia('(pointer: fine)').matches;
@@ -101,50 +117,82 @@
      дочитать. Раньше здесь был свой goTo на touchend — он срабатывал ПОВЕРХ
      нативного снапа и вызывал резкие перескакивания через страницу. Убрано. */
 
-  /* ---- подсказка «листайте» + кнопка «к началу» ---------------------- */
-  const hint = document.querySelector('.scroll-hint');
-  if (hint) hint.addEventListener('click', () => goTo(1));
-  const restart = document.querySelector('.restart');
-  if (restart) restart.addEventListener('click', () => goTo(0));
+  /* ---- кнопки-переходы (Начать / К началу / любые [data-goto]) -------- */
+  document.querySelectorAll('[data-goto]').forEach((b) => {
+    b.addEventListener('click', () => goTo(parseInt(b.dataset.goto, 10) || 0));
+  });
 
-  /* ---- фоновая музыка ------------------------------------------------- */
+  /* ---- видео: автозапуск только для активной панели ------------------- */
+  const safePlay = (v) => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+  const vids = Array.from(document.querySelectorAll('video.vframe'));
+
+  // проигрываем, когда кадр в зоне видимости, и ставим на паузу, когда ушёл —
+  // так одновременно работает 1–2 ролика, а не все сразу (экономим ресурсы).
+  const vIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      const v = e.target;
+      if (e.isIntersecting) {
+        if (!reduce && !v.dataset.userPaused) safePlay(v);
+      } else if (!v.paused) {
+        v.pause();
+      }
+    });
+  }, { threshold: 0.35 });
+  vids.forEach((v) => vIO.observe(v));
+
+  // клик по кадру (или кнопке play) — ручная пауза/воспроизведение + смена иконки
+  document.querySelectorAll('.videoframe__media').forEach((media) => {
+    const v = media.querySelector('video.vframe');
+    const btn = media.querySelector('.playbtn');
+    if (!v) {
+      // плейсхолдер без видео (пэкшот/логошот) — только лёгкий отклик кнопки
+      if (btn) btn.addEventListener('click', () => btn.animate(
+        [{ transform: 'scale(1)' }, { transform: 'scale(.9)' }, { transform: 'scale(1)' }],
+        { duration: 220, easing: 'ease' }));
+      return;
+    }
+    const frame = media.closest('.videoframe, .vcard');
+    const useEl = btn && btn.querySelector('use');
+    const sync = () => {
+      const playing = !v.paused;
+      if (frame) frame.classList.toggle('is-playing', playing);
+      if (useEl) useEl.setAttribute('href', playing ? '#i-pause' : '#i-play');
+    };
+    v.addEventListener('play', sync);
+    v.addEventListener('pause', sync);
+    media.addEventListener('click', () => {
+      if (v.paused) { delete v.dataset.userPaused; safePlay(v); }
+      else { v.pause(); v.dataset.userPaused = '1'; }
+    });
+  });
+
+  /* ---- фоновая музыка / музыкальный референс -------------------------- */
   const audio = document.getElementById('bg-audio');
   const toggle = document.querySelector('.sound-toggle');
+  const refBtn = document.querySelector('.ref-toggle');
   let wantsSound = false;
 
   function setSound(on) {
     wantsSound = on;
     toggle.setAttribute('aria-pressed', String(on));
     toggle.setAttribute('aria-label', on ? 'Выключить фоновую музыку' : 'Включить фоновую музыку');
+    if (refBtn) {
+      refBtn.setAttribute('aria-pressed', String(on));
+      const label = refBtn.querySelector('.ref-toggle__label');
+      if (label) label.textContent = on ? 'Выключить референс' : 'Включить референс';
+    }
     if (on) {
-      audio.play().catch(() => {/* нет файла или блок автоплея — просто ждём клика */ });
+      audio.play().catch(() => {/* нет файла или блок автоплея — ждём клика */ });
     } else {
       audio.pause();
     }
   }
+  // музыку включает сам пользователь (кнопка звука или референс в разделе 09)
   toggle.addEventListener('click', () => setSound(!wantsSound));
-
-  // мягкая попытка запустить музыку при первом взаимодействии со страницей
-  const kickstart = () => {
-    if (!wantsSound) { setSound(true); }
-    window.removeEventListener('pointerdown', kickstart);
-    window.removeEventListener('keydown', kickstart);
-  };
-  window.addEventListener('pointerdown', kickstart, { once: true });
-  window.addEventListener('keydown', kickstart, { once: true });
-
-  /* ---- кнопки play на видео-фреймах (заглушка под наполнение) --------- */
-  document.querySelectorAll('.playbtn').forEach((b) => {
-    b.addEventListener('click', () => {
-      b.animate(
-        [{ transform: 'scale(1)' }, { transform: 'scale(.9)' }, { transform: 'scale(1)' }],
-        { duration: 220, easing: 'ease' }
-      );
-      // здесь позже подключается реальное <video>.play()
-    });
-  });
+  if (refBtn) refBtn.addEventListener('click', () => setSound(!wantsSound));
 
   /* стартовое состояние */
   panels[0].classList.add('in-view');
   document.body.classList.add('is-cover');
+  updateCurrent();
 })();
