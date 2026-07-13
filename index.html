@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#043D20" />
+<title>Сделали мой день — режиссёрский тритмент · Кидз Комбо × СберПрайм</title>
+<meta name="description" content="Режиссёрский тритмент анимационного ролика «Кидз Комбо × СберПрайм 2026»." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ─────────────  SVG defs: rough-paper filter + icon sprite  ───────────── -->
+<svg class="svg-defs" aria-hidden="true" focusable="false" width="0" height="0">
+  <defs>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5-11-6.5Z"/></symbol>
+    <symbol id="i-sound-on" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Z" /><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-sound-off" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16 9l6 6M22 9l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M12 4v14M6 12l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></symbol>
+  </defs>
+</svg>
+
+<!-- ─────────────  Fixed chrome  ───────────── -->
+<header class="brandmark" aria-label="Вкусно — и точка × СберПрайм">
+  <span class="brandmark__vit">Вкусно&nbsp;—&nbsp;и&nbsp;точка</span>
+  <span class="brandmark__x">×</span>
+  <span class="brandmark__sber">СберПрайм</span>
+</header>
+
+<nav class="rail" aria-label="Навигация по главам">
+  <ol class="rail__list"></ol>
+</nav>
+
+<div class="topbar-progress" aria-hidden="true"><span class="topbar-progress__fill"></span></div>
+
+<button class="sound-toggle" type="button" aria-pressed="false" aria-label="Включить фоновую музыку" title="Фоновая музыка">
+  <svg class="sound-toggle__on"  aria-hidden="true"><use href="#i-sound-on"/></svg>
+  <svg class="sound-toggle__off" aria-hidden="true"><use href="#i-sound-off"/></svg>
+  <span class="sound-toggle__pulse" aria-hidden="true"></span>
+</button>
+
+<!-- put your track at assets/audio/theme.mp3 (or change the src) -->
+<audio id="bg-audio" loop preload="none" src="assets/audio/theme.mp3"></audio>
+
+<!-- ─────────────  DECK  ───────────── -->
+<main class="deck" id="deck" tabindex="-1">
+
+  <!-- 00 · COVER ------------------------------------------------------------->
+  <section class="panel panel--cover t-dark" id="p0" data-label="Заставка">
+    <div class="cover-bg" aria-hidden="true">
+      <span class="blob blob--sun"></span>
+      <span class="blob blob--green"></span>
+      <span class="blob blob--tomato"></span>
+      <span class="burst"></span>
+      <span class="halftone"></span>
+    </div>
+    <div class="cover-inner reveal">
+      <p class="eyebrow eyebrow--center">Вкусно — и точка × СберПрайм · Kids Combo · 2026</p>
+      <h1 class="cover-title">
+        <span class="cover-title__line">Сделали</span>
+        <span class="cover-title__line cover-title__line--accent">мой день</span>
+      </h1>
+      <p class="cover-sub">Режиссёрский тритмент анимационного ролика · 20″</p>
+    </div>
+    <button class="scroll-hint" type="button" aria-label="Листать дальше">
+      <span>листайте</span>
+      <svg aria-hidden="true"><use href="#i-arrow"/></svg>
+    </button>
+  </section>
+
+  <!-- 01 · ИДЕЯ -------------------------------------------------------------->
+  <section class="panel t-light" id="p1" data-label="Идея">
+    <div class="wrap">
+      <div class="lede reveal">
+        <p class="eyebrow"><span class="chapno">01</span> Идея</p>
+        <h2 class="h-display">Каждый день —<br><em>новое приключение</em></h2>
+      </div>
+      <div class="two-col">
+        <article class="note reveal" data-d="1">
+          <h3 class="note__title"><svg class="ic" aria-hidden="true"><use href="#i-bolt"/></svg> Инсайт</h3>
+          <p>У современных детей большая часть дня проходит за экранами. Родителям важно наполнить этот день чем-то не только увлекательным, но и полезным — тем, что развивает любопытство и навыки.</p>
+        </article>
+        <article class="note note--accent reveal" data-d="2">
+          <h3 class="note__title"><svg class="ic" aria-hidden="true"><use href="#i-bolt"/></svg> Идея</h3>
+          <p>Герои СберПрайма способны наполнить день Комбика событиями и приключениями. Вечером он с удовольствием вспоминает всё, что случилось, и говорит сам себе: это был очень клёвый день.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 · ГЕРОИ ------------------------------------------------------------->
+  <section class="panel t-dark" id="p2" data-label="Герои">
+    <span class="ghostnum" aria-hidden="true">02</span>
+    <div class="wrap">
+      <div class="lede reveal">
+        <p class="eyebrow eyebrow--light"><span class="chapno">02</span> Игрушки и герои</p>
+        <h2 class="h-display h-display--light">Супергерои вселенной<br><em>СберПрайм</em></h2>
+      </div>
+      <ul class="heroes">
+        <li class="hero-card reveal" style="--accent:var(--sun)" data-d="1">
+          <div class="hero-card__art"><span class="plate">Капитан Прайм</span></div>
+          <p class="hero-card__desc">Лидер команды и главный помощник. С ним день наполнится легендарными приключениями.</p>
+        </li>
+        <li class="hero-card reveal" style="--accent:var(--tomato)" data-d="2">
+          <div class="hero-card__art"><span class="plate">КотоДрайв</span></div>
+          <p class="hero-card__desc">Всегда знает короткий путь. С ним любая поездка — увлекательное путешествие.</p>
+        </li>
+        <li class="hero-card reveal" style="--accent:var(--lime)" data-d="3">
+          <div class="hero-card__art"><span class="plate">БыстроКот</span></div>
+          <p class="hero-card__desc">Мгновенно переносит нужные вещи прямо в лапы команды. Всегда появляется вовремя.</p>
+        </li>
+        <li class="hero-card reveal" style="--accent:var(--violet)" data-d="4">
+          <div class="hero-card__art"><span class="plate">МультиКуся</span></div>
+          <p class="hero-card__desc">Чувствует, какой истории не хватает именно сейчас, — и вечер становится интереснее.</p>
+        </li>
+        <li class="hero-card reveal" style="--accent:var(--sky)" data-d="5">
+          <div class="hero-card__art"><span class="plate">Леди Мелодия</span></div>
+          <p class="hero-card__desc">Управляет ритмом дня. Включает музыку — и обычный день превращается в танец.</p>
+        </li>
+        <li class="hero-card reveal" style="--accent:var(--green)" data-d="6">
+          <div class="hero-card__art"><span class="plate">Комбик</span></div>
+          <p class="hero-card__desc">Добрый и дружелюбный младшеклашка. Антропоморфная коробочка Кидз Комбо.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 03 · КОМБИК ------------------------------------------------------------>
+  <section class="panel t-light" id="p3" data-label="Комбик">
+    <div class="wrap wrap--split">
+      <div class="split-text reveal">
+        <p class="eyebrow"><span class="chapno">03</span> Главный герой</p>
+        <h2 class="h-display">Комбик</h2>
+        <p class="body-lg">Анимированная коробочка Кидз Комбо: добрая, смешная и дружелюбная. Он не говорит, но активно использует мимику, эмоционально реагирует и произносит короткие междометия. Его мир — это бесконечное детство.</p>
+        <ul class="tag-row">
+          <li class="tag">3D-модель с ригом</li>
+          <li class="tag">Брендовые цвета</li>
+          <li class="tag">Матовая текстура</li>
+        </ul>
+      </div>
+      <figure class="videoframe videoframe--tall reveal" data-d="1">
+        <div class="videoframe__media" role="img" aria-label="Место для видео: turnaround Комбика">
+          <button class="playbtn" type="button" aria-label="Воспроизвести">
+            <svg aria-hidden="true"><use href="#i-play"/></svg>
+          </button>
+          <span class="videoframe__slug">character&nbsp;/&nbsp;turnaround</span>
+        </div>
+        <figcaption class="videoframe__plate">Комбик · 360°</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 04 · СЦЕНАРИЙ ---------------------------------------------------------->
+  <section class="panel t-dark" id="p4" data-label="Сценарий">
+    <span class="ghostnum" aria-hidden="true">04</span>
+    <div class="wrap wrap--split wrap--split-rev">
+      <figure class="videoframe reveal" data-d="1">
+        <div class="videoframe__media" role="img" aria-label="Место для видео: аниматик ролика">
+          <button class="playbtn" type="button" aria-label="Воспроизвести">
+            <svg aria-hidden="true"><use href="#i-play"/></svg>
+          </button>
+          <span class="videoframe__tc">REEL · 00:20</span>
+          <span class="videoframe__slug">script&nbsp;/&nbsp;animatic</span>
+        </div>
+        <figcaption class="videoframe__plate">Аниматик · превью</figcaption>
+      </figure>
+      <div class="split-text reveal">
+        <p class="eyebrow eyebrow--light"><span class="chapno">04</span> Сценарий</p>
+        <h2 class="h-display h-display--light">Воспоминания<br><em>о клёвом дне</em></h2>
+        <ol class="beats">
+          <li><span class="beats__n">1</span> Комбик вешает на стену плакат с героями. Капитан Прайм подмигивает — запускаются воспоминания.</li>
+          <li><span class="beats__n">2</span> Леди Мелодия поёт в караоке и кидает микрофон Комбику — он подхватывает песню.</li>
+          <li><span class="beats__n">3</span> БыстроКот молнией приносит морковные палочки и яблочные дольки прямо в рюкзак.</li>
+          <li><span class="beats__n">4</span> Комбик мчится пассажиром на бургере КотоДрайва — от ветра загибается ручка.</li>
+          <li><span class="beats__n">5</span> МультиКуся запускает голограмму мультфильма. Зум на Капитана Прайма — склейка на пэкшот.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · ГРАФИКА ----------------------------------------------------------->
+  <section class="panel t-light" id="p5" data-label="Стиль">
+    <div class="wrap">
+      <div class="lede reveal">
+        <p class="eyebrow"><span class="chapno">05</span> Графика</p>
+        <h2 class="h-display">На стыке <em>3D и комикса</em></h2>
+        <p class="body-lg body-lg--wide">Герои и пространства — в 3D. В моменты заявления персонажей появляется 2D-фон в супергеройской комиксной стилистике: рваная бумага-подложка со стоп-моушен, комиксные рамки, плашки с именами и графика движения.</p>
+      </div>
+      <div class="media-row">
+        <figure class="videoframe videoframe--sm reveal" data-d="1">
+          <div class="videoframe__media" role="img" aria-label="Референс стиля 3D">
+            <button class="playbtn playbtn--sm" type="button" aria-label="Воспроизвести"><svg aria-hidden="true"><use href="#i-play"/></svg></button>
+            <span class="videoframe__slug">3D&nbsp;render</span>
+          </div>
+          <figcaption class="videoframe__plate">3D-стилистика</figcaption>
+        </figure>
+        <figure class="videoframe videoframe--sm reveal" data-d="2">
+          <div class="videoframe__media" role="img" aria-label="Референс: рваная бумага">
+            <button class="playbtn playbtn--sm" type="button" aria-label="Воспроизвести"><svg aria-hidden="true"><use href="#i-play"/></svg></button>
+            <span class="videoframe__slug">paper&nbsp;/&nbsp;stop-motion</span>
+          </div>
+          <figcaption class="videoframe__plate">2D-подложка</figcaption>
+        </figure>
+        <figure class="videoframe videoframe--sm reveal" data-d="3">
+          <div class="videoframe__media" role="img" aria-label="Референс: шлейф СберПрайм">
+            <button class="playbtn playbtn--sm" type="button" aria-label="Воспроизвести"><svg aria-hidden="true"><use href="#i-play"/></svg></button>
+            <span class="videoframe__slug">FX&nbsp;/&nbsp;шлейф</span>
+          </div>
+          <figcaption class="videoframe__plate">Спецэффекты</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · ЛОКАЦИЯ ----------------------------------------------------------->
+  <section class="panel t-dark" id="p6" data-label="Локация">
+    <span class="ghostnum" aria-hidden="true">06</span>
+    <div class="wrap wrap--split">
+      <div class="split-text reveal">
+        <p class="eyebrow eyebrow--light"><span class="chapno">06</span> Локация</p>
+        <h2 class="h-display h-display--light">Детская комната</h2>
+        <p class="body-lg body-lg--onDark">Главная локация ролика — яркая, брендированная и обжитая. Настоящее место обитания ребёнка: постеры, стикеры, рисунки, коврик, скейт. Свет — как в яркий солнечный день, цвета героев остаются брендовыми.</p>
+        <ul class="tag-row tag-row--light">
+          <li class="tag tag--light">Брендовые цвета</li>
+          <li class="tag tag--light">Паттерны ВИТ</li>
+          <li class="tag tag--light">Элементы СберПрайм</li>
+        </ul>
+      </div>
+      <figure class="videoframe reveal" data-d="1">
+        <div class="videoframe__media" role="img" aria-label="Место для видео: облёт комнаты">
+          <button class="playbtn" type="button" aria-label="Воспроизвести"><svg aria-hidden="true"><use href="#i-play"/></svg></button>
+          <span class="videoframe__slug">location&nbsp;/&nbsp;облёт</span>
+        </div>
+        <figcaption class="videoframe__plate">Комната · 3D-превью</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 07 · ПЭКШОТ / ЛОГОШОТ -------------------------------------------------->
+  <section class="panel t-light" id="p7" data-label="Пэкшот">
+    <div class="wrap">
+      <div class="lede reveal">
+        <p class="eyebrow"><span class="chapno">07</span> Пэкшот и логошот</p>
+        <h2 class="h-display">Финальный <em>кадр</em></h2>
+        <p class="body-lg body-lg--wide">Лимитированная коробочка Кидз Комбо, пятеро героев и напиток на столе в детской комнате. КотоДрайв въезжает из левой части кадра. Логошот — «Всё как мы любим».</p>
+      </div>
+      <div class="media-row media-row--2">
+        <figure class="videoframe reveal" data-d="1">
+          <div class="videoframe__media" role="img" aria-label="Место для видео: пэкшот">
+            <button class="playbtn" type="button" aria-label="Воспроизвести"><svg aria-hidden="true"><use href="#i-play"/></svg></button>
+            <span class="videoframe__slug">packshot</span>
+          </div>
+          <figcaption class="videoframe__plate">Пэкшот</figcaption>
+        </figure>
+        <figure class="videoframe reveal" data-d="2">
+          <div class="videoframe__media" role="img" aria-label="Место для видео: логошот">
+            <button class="playbtn" type="button" aria-label="Воспроизвести"><svg aria-hidden="true"><use href="#i-play"/></svg></button>
+            <span class="videoframe__slug">logoshot</span>
+          </div>
+          <figcaption class="videoframe__plate">Логошот</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · МУЗЫКА / ЗВУК ----------------------------------------------------->
+  <section class="panel t-dark" id="p8" data-label="Музыка">
+    <span class="ghostnum" aria-hidden="true">08</span>
+    <div class="wrap">
+      <div class="lede reveal">
+        <p class="eyebrow eyebrow--light"><span class="chapno">08</span> Музыка и звук</p>
+        <h2 class="h-display h-display--light">По-детски <em>торжественно</em></h2>
+      </div>
+      <div class="two-col two-col--dark">
+        <article class="note note--glass reveal" data-d="1">
+          <h3 class="note__title note__title--light">Музыка</h3>
+          <p>Воодушевляющая и насыщенная тема — возможно, с духовыми. Супергерои всё-таки. Настроение — искренний детский восторг и ощущение солнечного дня.</p>
+          <div class="equalizer" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </article>
+        <article class="note note--glass reveal" data-d="2">
+          <h3 class="note__title note__title--light">SFX и диктор</h3>
+          <p>Мультяшные «жвущи» и «бамы», саунд-дизайн вылета из коробки, транзишены между воспоминаниями. Диктор — искренний детский голос.</p>
+          <div class="equalizer" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 · ФИНАЛ ------------------------------------------------------------->
+  <section class="panel panel--end t-dark" id="p9" data-label="Финал">
+    <div class="cover-bg" aria-hidden="true">
+      <span class="blob blob--sun"></span>
+      <span class="blob blob--green"></span>
+      <span class="burst"></span>
+      <span class="halftone"></span>
+    </div>
+    <div class="cover-inner reveal">
+      <p class="eyebrow eyebrow--center">Вкусно — и точка × СберПрайм · 2026</p>
+      <h2 class="cover-title cover-title--end">Спасибо!</h2>
+      <p class="cover-sub">Всё как мы любим · Кидз Комбо</p>
+      <button class="restart" type="button">К началу</button>
+    </div>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
