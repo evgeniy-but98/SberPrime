@@ -1257,8 +1257,8 @@ body.nav-on-light .rail__item[aria-current="true"] .rail__dot {
 /* плашка «Режиссёрский подход» в углу кадра (предисловие) */
 .videoframe__plate--corner {
   position: absolute;
-  right: .6rem;
-  bottom: .6rem;
+  left: .6rem;
+  top: .6rem;
   margin: 0;
   z-index: 3;
   font-size: .78rem;
@@ -1689,6 +1689,7 @@ body.nav-on-light .rail__item[aria-current="true"] .rail__dot {
     opacity: 1;
   }
 }
+
 /* =========================================================================
    ПРАВКИ ЗАКАЗЧИКА
    ========================================================================= */
