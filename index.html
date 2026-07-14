@@ -303,7 +303,7 @@
             </div>
           </li>
         </ul>
-        <p class="fineprint reveal">Палитра предварительная — финальные цвета лучше утвердить уже на стиле-фреймах.</p>
+        <p class="fineprint reveal">Палитра предварительная — финальные цвета лучше утвердить уже на стайл-фреймах.</p>
       </div>
     </section>
 
@@ -668,6 +668,16 @@
             <div class="equalizer" aria-hidden="true">
               <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
             </div>
+            <button class="ref-toggle ref-toggle--sfx" type="button" aria-pressed="false">
+              <svg class="ref-toggle__play" aria-hidden="true">
+                <use href="#i-play" />
+              </svg>
+              <svg class="ref-toggle__pause" aria-hidden="true">
+                <use href="#i-pause" />
+              </svg>
+              <span class="ref-toggle__label">Включить референс</span>
+            </button>
+            <audio class="sfx-audio" preload="none" src="media/jump-sound.mp3"></audio>
           </article>
         </div>
       </div>

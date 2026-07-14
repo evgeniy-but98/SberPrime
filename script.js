@@ -125,7 +125,7 @@
   });
 
   /* ---- видео: автозапуск только для активной панели ------------------- */
-  const safePlay = (v) => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+  const safePlay = (v) => { const p = v.play(); if (p && p.catch) p.catch(() => { }); };
   const vids = Array.from(document.querySelectorAll('video.vframe'));
 
   // проигрываем, когда кадр в зоне видимости, и ставим на паузу, когда ушёл —
@@ -192,6 +192,22 @@
   // музыку включает сам пользователь (кнопка звука или референс в разделе 09)
   toggle.addEventListener('click', () => setSound(!wantsSound));
   if (refBtn) refBtn.addEventListener('click', () => setSound(!wantsSound));
+
+  /* ---- SFX-референс: одноразовый звук, без зацикливания ---- */
+  document.querySelectorAll('.ref-toggle--sfx').forEach((btn) => {
+    const sfx = btn.parentElement.querySelector('.sfx-audio');
+    if (!sfx) return;
+    const label = btn.querySelector('.ref-toggle__label');
+    const set = (on) => {
+      btn.setAttribute('aria-pressed', String(on));
+      if (label) label.textContent = on ? 'Выключить референс' : 'Включить референс';
+    };
+    btn.addEventListener('click', () => {
+      if (sfx.paused) { sfx.currentTime = 0; sfx.play().catch(() => { }); set(true); }
+      else { sfx.pause(); set(false); }
+    });
+    sfx.addEventListener('ended', () => set(false));
+  });
 
   /* стартовое состояние */
   panels[0].classList.add('in-view');
