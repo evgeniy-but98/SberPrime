@@ -202,6 +202,19 @@ li {
   transform: rotate(-3deg);
 }
 
+.dark-chapno {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2.1em;
+  height: 2.1em;
+  padding: 0 .5em;
+  background: var(--tomato);
+  color: #000000;
+  border-radius: 999px;
+  letter-spacing: 0;
+  transform: rotate(-3deg);
+}
+
 .h-display {
   font-family: var(--font-display);
   font-weight: 800;
@@ -891,6 +904,10 @@ li {
   color: rgba(255, 255, 255, .05);
   pointer-events: none;
   user-select: none;
+}
+
+.t-light .ghostnum {
+  color: rgba(0, 162, 74, .12);
 }
 
 /* =========================================================================
@@ -1862,15 +1879,6 @@ body.nav-on-light .rail__item[aria-current="true"] .rail__dot {
   max-width: 100%;
 }
 
-/* пэкшот-слайд: медиа-ряд ограничен 900px — текст тянем ровно до него */
-#p8 .lede {
-  max-width: 100%;
-}
-
-#p8 .lede .body-lg {
-  max-width: 900px;
-}
-
 /* --- ЛОКАЦИЯ: список предметов интерьера -------------------------------- */
 .loc-list {
   list-style: none;
@@ -1900,16 +1908,39 @@ body.nav-on-light .rail__item[aria-current="true"] .rail__dot {
 }
 
 /* --- СЦЕНАРИЙ: раскадровка «кадр + текст», чередование сторон ----------- */
+/* облегчённый заголовок сценарных страниц — экономит вертикаль,
+   чтобы контент помещался на экран без переполнения */
+.lede--scene {
+  margin-bottom: clamp(.7rem, 1.6vh, 1.2rem);
+}
+
+.h-scene {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -.01em;
+  font-size: clamp(1.45rem, 3vw, 2.35rem);
+  margin: 0;
+  color: var(--paper);
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
+
+.h-scene em {
+  font-style: normal;
+  color: var(--sun);
+}
+
 .scenes {
   display: grid;
-  gap: clamp(1.6rem, 3.4vh, 2.8rem);
-  margin-top: clamp(1.3rem, 2.6vh, 2.2rem);
+  gap: clamp(1.05rem, 2.4vh, 1.9rem);
+  margin-top: clamp(.9rem, 1.8vh, 1.4rem);
 }
 
 .scene {
   display: grid;
-  grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
-  gap: clamp(1.3rem, 3vw, 2.8rem);
+  grid-template-columns: minmax(0, .58fr) minmax(0, 1fr);
+  gap: clamp(1rem, 2.4vw, 1.9rem);
   align-items: center;
 }
 
@@ -1936,19 +1967,19 @@ body.nav-on-light .rail__item[aria-current="true"] .rail__dot {
 .scene__head {
   display: flex;
   align-items: center;
-  gap: .7rem;
-  margin-bottom: .55rem;
+  gap: .6rem;
+  margin-bottom: .45rem;
 }
 
 .scene__n {
   flex: none;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: .92rem;
+  font-size: .86rem;
   display: grid;
   place-items: center;
-  width: 2.1em;
-  height: 2.1em;
+  width: 2em;
+  height: 2em;
   color: var(--ink);
   background: var(--sun);
   border-radius: 50%;
@@ -1958,8 +1989,8 @@ body.nav-on-light .rail__item[aria-current="true"] .rail__dot {
 .scene__title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.15rem, 2vw, 1.55rem);
-  line-height: 1.08;
+  font-size: clamp(1.04rem, 1.7vw, 1.34rem);
+  line-height: 1.1;
   margin: 0;
   color: var(--paper);
   overflow-wrap: normal;
@@ -1967,29 +1998,29 @@ body.nav-on-light .rail__item[aria-current="true"] .rail__dot {
 
 .scene__desc {
   margin: 0;
-  font-size: clamp(.95rem, 1.4vw, 1.08rem);
-  line-height: 1.55;
+  font-size: clamp(.88rem, 1.15vw, .99rem);
+  line-height: 1.48;
   color: rgba(255, 246, 230, .86);
 }
 
-/* вступление — крупный лид без номера */
+/* вступление — лид без номера */
 .scene__lead {
   margin: 0;
-  font-size: clamp(1.1rem, 1.9vw, 1.42rem);
-  line-height: 1.4;
+  font-size: clamp(1.02rem, 1.6vw, 1.24rem);
+  line-height: 1.38;
   font-weight: 500;
   color: var(--paper);
 }
 
 .scene--lead .scene__text {
-  padding-block: .4rem;
+  padding-block: .2rem;
 }
 
 /* логошот — короткая финальная строка крупнее */
 .scene__desc--big {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+  font-size: clamp(1.2rem, 2.2vw, 1.7rem);
   line-height: 1.15;
   color: var(--sun);
 }
